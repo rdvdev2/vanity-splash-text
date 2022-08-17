@@ -1,11 +1,11 @@
 {
 	"required": true,
 	"minVersion": "0.8",
-	"package": "com.example.example_mod.mixin",
+	"package": "com.rdvdev2.vanity_splash_text.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [],
 	"client": [
-		"TitleScreenMixin"
+		"SplashTextResourceSupplierMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

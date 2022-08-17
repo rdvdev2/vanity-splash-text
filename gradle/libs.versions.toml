@@ -20,3 +20,4 @@ quilted_fabric_api = ["quilted_fabric_api", "quilted_fabric_api_deprecated"]
 
 [plugins]
 quilt_loom = { id = "org.quiltmc.loom", version = "0.12.+" }
+quiltflower = { id = "io.github.juuxel.loom-quiltflower", version = "1.7.+"}
