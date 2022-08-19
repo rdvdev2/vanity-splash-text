@@ -1,13 +1,14 @@
 {
-	"required": true,
-	"minVersion": "0.8",
-	"package": "com.rdvdev2.vanity_splash_text.mixin",
-	"compatibilityLevel": "JAVA_17",
-	"mixins": [],
-	"client": [
-		"SplashTextResourceSupplierMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.rdvdev2.vanity_splash_text.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [],
+  "client": [
+    "MinecraftClientMixin",
+    "SplashTextResourceSupplierAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
 	}
 }
