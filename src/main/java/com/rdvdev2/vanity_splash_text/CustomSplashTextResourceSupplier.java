@@ -21,7 +21,7 @@ public class CustomSplashTextResourceSupplier extends SplashTextResourceSupplier
 
 	@Override
 	protected List<String> prepare(ResourceManager resourceManager, Profiler profiler) {
-		Pattern pattern = Pattern.compile("\\A" + ModConfig.get_ignore_modid_regex() + "\\Z");
+		Pattern pattern = Pattern.compile("\\A" + Mod.CONFIG.ignore_modid_regex.value() + "\\Z");
 
 		Mod.LOGGER.info("Started generating splash messages");
 		List<String> splash_texts = QuiltLoader.getAllMods()
@@ -38,7 +38,7 @@ public class CustomSplashTextResourceSupplier extends SplashTextResourceSupplier
 	@Nullable
 	@Override
 	public String get() {
-		if (!ModConfig.get_skip_seasonal_splash_text()) {
+		if (!Mod.CONFIG.skip_seasonal_splash_text.value()) {
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(new Date());
 
