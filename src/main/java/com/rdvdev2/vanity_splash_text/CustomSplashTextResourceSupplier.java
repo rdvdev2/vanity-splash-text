@@ -11,11 +11,9 @@ import org.jetbrains.annotations.Nullable;
 import org.quiltmc.loader.api.ModMetadata;
 import org.quiltmc.loader.api.QuiltLoader;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class CustomSplashTextResourceSupplier extends SplashTextResourceSupplier {
 	public CustomSplashTextResourceSupplier(Session session) {
@@ -29,7 +27,7 @@ public class CustomSplashTextResourceSupplier extends SplashTextResourceSupplier
 
 		Mod.LOGGER.info("Started generating splash messages");
 		List<String> templates = Mod.CONFIG.splash_templates.value();
-		List<String> splash_texts = QuiltLoader.getAllMods()
+		ArrayList<String> splash_texts = QuiltLoader.getAllMods()
 				.parallelStream()
 				.filter(mod -> !pattern.matcher(mod.metadata().id()).find())
 				.flatMap(mod -> templates.parallelStream().map(template -> Pair.of(template, mod.metadata())))
@@ -41,9 +39,14 @@ public class CustomSplashTextResourceSupplier extends SplashTextResourceSupplier
 					Mod.LOGGER.debug("Generated splash message: {}", splash);
 					return splash;
 				})
-				.toList();
+				.collect(Collectors.toCollection(ArrayList::new));
 
 		Mod.LOGGER.info("Generated {} splash messages from {} mods", splash_texts.size(), QuiltLoader.getAllMods().size());
+
+		if (Mod.CONFIG.keep_old_splashes.value()) {
+			splash_texts.addAll(super.prepare(resourceManager, profiler));
+		}
+
 		return splash_texts;
 	}
 

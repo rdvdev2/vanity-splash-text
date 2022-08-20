@@ -10,6 +10,7 @@ public class ModConfig {
 	private static final String IGNORE_MODID_REGEXS = "ignore_modid_regexs";
 	private static final String SPLASH_TEMPLATES = "splash_templates";
 	private static final String THE_ANSWER = "the_answer";
+	private static final String KEEP_OLD_SPLASHES = "keep_old_splashes";
 
 	public final TrackedValue<Boolean> skip_seasonal_splash_text = TrackedValue.create(false, SKIP_SEASONAL_SPLASH_TEXT);
 	public final TrackedValue<ValueList<String>> ignore_modid_regexs = TrackedValue.create(ValueList.create("",
@@ -30,6 +31,7 @@ public class ModConfig {
 			"If you liked @@MOD@@, it's authors will love to hear about it!"
 		), SPLASH_TEMPLATES);
 	public final TrackedValue<Integer> the_answer = TrackedValue.create(0, THE_ANSWER);
+	public final TrackedValue<Boolean> keep_old_splashes = TrackedValue.create(false, KEEP_OLD_SPLASHES);
 
 	public ModConfig() {
 		QuiltConfig.create("vanity_splash_text", "config", this::creator);
@@ -40,6 +42,7 @@ public class ModConfig {
 				.field(skip_seasonal_splash_text)
 				.field(ignore_modid_regexs)
 				.field(splash_templates)
-				.field(the_answer);
+				.field(the_answer)
+				.field(keep_old_splashes);
 	}
 }
