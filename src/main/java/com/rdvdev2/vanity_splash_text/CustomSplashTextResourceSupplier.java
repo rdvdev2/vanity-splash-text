@@ -21,7 +21,8 @@ public class CustomSplashTextResourceSupplier extends SplashTextResourceSupplier
 
 	@Override
 	protected List<String> prepare(ResourceManager resourceManager, Profiler profiler) {
-		Pattern pattern = Pattern.compile("\\A" + Mod.CONFIG.ignore_modid_regex.value() + "\\Z");
+		String stitched_pattern = "\\A" + String.join("|", Mod.CONFIG.ignore_modid_regexs.value()) + "\\Z";
+		Pattern pattern = Pattern.compile(stitched_pattern);
 
 		Mod.LOGGER.info("Started generating splash messages");
 		List<String> splash_texts = QuiltLoader.getAllMods()
