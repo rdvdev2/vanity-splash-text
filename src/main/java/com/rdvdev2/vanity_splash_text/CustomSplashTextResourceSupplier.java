@@ -1,12 +1,14 @@
 package com.rdvdev2.vanity_splash_text;
 
 import com.rdvdev2.vanity_splash_text.mixin.SplashTextResourceSupplierAccessor;
+import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.client.resource.SplashTextResourceSupplier;
 import net.minecraft.client.util.Session;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.profiler.Profiler;
 import net.minecraft.util.random.RandomGenerator;
 import org.jetbrains.annotations.Nullable;
+import org.quiltmc.loader.api.ModMetadata;
 import org.quiltmc.loader.api.QuiltLoader;
 
 import java.util.Calendar;
@@ -25,11 +27,19 @@ public class CustomSplashTextResourceSupplier extends SplashTextResourceSupplier
 		Pattern pattern = Pattern.compile(stitched_pattern);
 
 		Mod.LOGGER.info("Started generating splash messages");
+		List<String> templates = Mod.CONFIG.splash_templates.value();
 		List<String> splash_texts = QuiltLoader.getAllMods()
 				.parallelStream()
 				.filter(mod -> !pattern.matcher(mod.metadata().id()).find())
-				.map(mod -> mod.metadata().name())
-				.map(mod_name -> String.format("Now featuring %s!", mod_name))
+				.flatMap(mod -> templates.parallelStream().map(template -> Pair.of(template, mod.metadata())))
+				.map(data -> {
+					ModMetadata meta = data.second();
+					String splash = data.first()
+							.replaceAll("@@MOD@@", meta.name())
+							.replaceAll("@@VERSION@@", meta.version().raw());
+					Mod.LOGGER.debug("Generated splash message: {}", splash);
+					return splash;
+				})
 				.toList();
 
 		Mod.LOGGER.info("Generated {} splash messages from {} mods", splash_texts.size(), QuiltLoader.getAllMods().size());
