@@ -7,15 +7,12 @@ import org.quiltmc.config.api.values.ValueList;
 import org.quiltmc.loader.api.config.QuiltConfig;
 
 public class ModConfig {
-	private static final String SKIP_SEASONAL_SPLASH_TEXT = "skip_seasonal_splash_text";
 	private static final String IGNORE_MODID_REGEXS = "ignore_modid_regexs";
 	private static final String SPLASH_TEMPLATES = "splash_templates";
+	private static final String SKIP_SEASONAL_SPLASH_TEXT = "skip_seasonal_splash_text";
 	private static final String THE_ANSWER = "the_answer";
 	private static final String KEEP_OLD_SPLASHES = "keep_old_splashes";
 
-	public final TrackedValue<Boolean> skip_seasonal_splash_text = TrackedValue.create(false, SKIP_SEASONAL_SPLASH_TEXT, c -> {
-		c.metadata(Comment.TYPE, comment -> comment.add("Set this option to false to enable seasonal splash texts (for Christmas, New year, and Halloween)"));
-	});
 	public final TrackedValue<ValueList<String>> ignore_modid_regexs = TrackedValue.create(ValueList.create("",
 			"java",
 			"minecraft",
@@ -40,6 +37,9 @@ public class ModConfig {
 		c.metadata(Comment.TYPE, comment -> comment.add("@@VERSION@@ will be replaced with a mod's version"));
 		c.metadata(Comment.TYPE, comment -> comment.add("If various replace patterns are used in a template, they will refer to the same mod"));
 	});
+	public final TrackedValue<Boolean> skip_seasonal_splash_text = TrackedValue.create(false, SKIP_SEASONAL_SPLASH_TEXT, c -> {
+		c.metadata(Comment.TYPE, comment -> comment.add("Set this option to false to enable seasonal splash texts (for Christmas, New year, and Halloween)"));
+	});
 	public final TrackedValue<Integer> the_answer = TrackedValue.create(0, THE_ANSWER, c -> {
 		c.metadata(Comment.TYPE, comment -> comment.add("The special PLAYER IS YOU splash text will be enabled if this value is set to 24"));
 	});
@@ -53,9 +53,9 @@ public class ModConfig {
 
 	private void creator(Config.Builder builder) {
 		builder
-				.field(skip_seasonal_splash_text)
 				.field(ignore_modid_regexs)
 				.field(splash_templates)
+				.field(skip_seasonal_splash_text)
 				.field(the_answer)
 				.field(keep_old_splashes);
 	}
