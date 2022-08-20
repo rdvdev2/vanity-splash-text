@@ -14,6 +14,7 @@ import org.quiltmc.loader.api.QuiltLoader;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class CustomSplashTextResourceSupplier extends SplashTextResourceSupplier {
@@ -67,6 +68,13 @@ public class CustomSplashTextResourceSupplier extends SplashTextResourceSupplier
 
 		List<String> splashTexts = ((SplashTextResourceSupplierAccessor) this).getSplashTexts();
 		RandomGenerator random = SplashTextResourceSupplierAccessor.getRandom();
+
+		if (Mod.CONFIG.the_answer.value() == 42) {
+			if (random.nextInt(Math.max(splashTexts.size(), 43)) == 42) {
+				Session session = ((SplashTextResourceSupplierAccessor) this).getSession();
+				return session.getUsername().toUpperCase(Locale.ROOT) + " IS YOU";
+			}
+		}
 
 		if (splashTexts.isEmpty()) {
 			return null;
