@@ -30,7 +30,7 @@ public class ModConfig {
 			"Who's at version @@VERSION@@? That's right, @@MOD@@!",
 			"Did you ever play before with @@MOD@@?",
 			"@@MOD@@ is @@MOD@@",
-			"If you liked @@MOD@@, it's authors will love to hear about it!"
+			"If you liked @@MOD@@, its authors will love to hear about it!"
 		), SPLASH_TEMPLATES, c -> {
 		c.metadata(Comment.TYPE, comment -> comment.add("This templates are used to generate the splash texts. Some patterns are replaced:"));
 		c.metadata(Comment.TYPE, comment -> comment.add("@@MOD@@ will be replaced with a mod's name"));
