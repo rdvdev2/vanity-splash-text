@@ -32,7 +32,7 @@ public class ModConfig {
 			"@@MOD@@ is @@MOD@@",
 			"If you like @@MOD@@, its authors will love to hear about it!"
 		), SPLASH_TEMPLATES, c -> {
-		c.metadata(Comment.TYPE, comment -> comment.add("These templates are used to generate the splash texts. Some patterns are replaced:"));
+		c.metadata(Comment.TYPE, comment -> comment.add("The mod uses these templates to generate the splash texts. Some patterns it replaces:"));
 		c.metadata(Comment.TYPE, comment -> comment.add("@@MOD@@ will be replaced with a mod's name"));
 		c.metadata(Comment.TYPE, comment -> comment.add("@@VERSION@@ will be replaced with a mod's version"));
 		c.metadata(Comment.TYPE, comment -> comment.add("If various replace patterns are used in a template, they will refer to the same mod"));
